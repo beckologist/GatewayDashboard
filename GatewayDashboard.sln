@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.1022
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GatewayDashboard", "GatewayDashboard\GatewayDashboard.csproj", "{41F26D8E-F870-459C-918C-6BA89C804D9B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GatewayDashboard", "GatewayDashboard\GatewayDashboard.csproj", "{6F4C2210-1BAE-4FB5-AD18-FE1F24A6A522}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{41F26D8E-F870-459C-918C-6BA89C804D9B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{41F26D8E-F870-459C-918C-6BA89C804D9B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{41F26D8E-F870-459C-918C-6BA89C804D9B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{41F26D8E-F870-459C-918C-6BA89C804D9B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6F4C2210-1BAE-4FB5-AD18-FE1F24A6A522}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6F4C2210-1BAE-4FB5-AD18-FE1F24A6A522}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6F4C2210-1BAE-4FB5-AD18-FE1F24A6A522}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6F4C2210-1BAE-4FB5-AD18-FE1F24A6A522}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {814551FF-08DC-43A5-97C9-D16A0BCBBF29}
+		SolutionGuid = {6A3897F9-0212-44A6-988B-73554AFEAAE6}
 	EndGlobalSection
 EndGlobal

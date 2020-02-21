@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace GatewayDashboard.Properties
+namespace SamplingStartStop.Properties
 {
 
 
