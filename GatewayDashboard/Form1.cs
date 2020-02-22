@@ -42,29 +42,43 @@ namespace SamplingStartStop
         // Sampling start button click.  
         private void buttonSamplingStart_Click(object sender, EventArgs e)
         {
-            // Create a background process
-            BackgroundWorker myBG = new BackgroundWorker();
-            myBG.DoWork += new DoWorkEventHandler(myBG_DoWork);
-            myBG.RunWorkerCompleted += new RunWorkerCompletedEventHandler(myBG_RunWorkerCompleted);
-            myBG.RunWorkerAsync();
+            try
+            {
+                // Create a background process
+                BackgroundWorker myBG = new BackgroundWorker();
+                myBG.DoWork += new DoWorkEventHandler(myBG_DoWork);
+                myBG.RunWorkerCompleted += new RunWorkerCompletedEventHandler(myBG_RunWorkerCompleted);
+                myBG.RunWorkerAsync();
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show("Error:: " + exception.Message);
+            }
 
         }
 
         // This gets called when the background job completes
         private void myBG_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            // Call routine to set UI buttons/text to stopped state
-            stoppedSettings();
+            try
+            {
+                // Call routine to set UI buttons/text to stopped state
+                stoppedSettings();
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show("Error:: " + exception.Message);
+            }
         }
 
         // This is the routine that does the work for the background process
         private void myBG_DoWork(object sender, DoWorkEventArgs e)
         {
-            // Call routine to set UI buttons/text to started state
-            startedSettings();
-
             try
             {
+                // Call routine to set UI buttons/text to started state
+                startedSettings();
+
                 //Set up the SSH connection
                 var myClient = new SshClient(theHost, theUser, thePass);
                 labelSamplingStatus.Text = "Connecting";
@@ -89,107 +103,92 @@ namespace SamplingStartStop
         // Set Sampling UI buttons and text to started state
         private void startedSettings()
         {
-            buttonSamplingStart.Enabled = false;
-            buttonSamplingStop.Enabled = true;
-            labelSamplingStatus.Text = "Started";
-            labelSamplingStatus.ForeColor = System.Drawing.Color.Green;
+            try
+            {
+                buttonSamplingStart.Enabled = false;
+                buttonSamplingStop.Enabled = true;
+                labelSamplingStatus.Text = "Started";
+                labelSamplingStatus.ForeColor = System.Drawing.Color.Green;
+            }
+            catch (Exception myException)
+            {
+                MessageBox.Show("Error:: " + myException.Message);
+            }
         }
 
         // Set Thingworx send UI buttons and text to started state
         private void startedSettingsSend()
         {
-            buttonThingworxUploadStart.Enabled = false;
-            buttonThingworxUploadStop.Enabled = true;
-            labelUploadStatus.Text = "Started";
-            labelUploadStatus.ForeColor = System.Drawing.Color.Green;
+            try
+            {
+                buttonThingworxUploadStart.Enabled = false;
+                buttonThingworxUploadStop.Enabled = true;
+                labelUploadStatus.Text = "Started";
+                labelUploadStatus.ForeColor = System.Drawing.Color.Green;
+            }
+            catch (Exception myException)
+            {
+                MessageBox.Show("Error:: " + myException.Message);
+            }
         }
 
 
         // Set UI buttons and text to stopped state
         private void stoppedSettings()
         {
-            buttonSamplingStart.Enabled = true;
-            buttonSamplingStop.Enabled = false;
-            labelSamplingStatus.Text = "Stopped";
-            labelSamplingStatus.ForeColor = System.Drawing.Color.Red;
+            try
+            {
+                buttonSamplingStart.Enabled = true;
+                buttonSamplingStop.Enabled = false;
+                labelSamplingStatus.Text = "Stopped";
+                labelSamplingStatus.ForeColor = System.Drawing.Color.Red;
+            }
+            catch (Exception myException)
+            {
+                MessageBox.Show("Error:: " + myException.Message);
+            }
         }
 
         // Set Thingworx send UI buttons and text to stopped state
         private void stoppedSettingsSend()
         {
-            buttonThingworxUploadStart.Enabled = true;
-            buttonThingworxUploadStop.Enabled = false;
-            labelUploadStatus.Text = "Stopped";
-            labelUploadStatus.ForeColor = System.Drawing.Color.Red;
+            try
+            {
+                buttonThingworxUploadStart.Enabled = true;
+                buttonThingworxUploadStop.Enabled = false;
+                labelUploadStatus.Text = "Stopped";
+                labelUploadStatus.ForeColor = System.Drawing.Color.Red;
+            }
+            catch (Exception myException)
+            {
+                MessageBox.Show("Error:: " + myException.Message);
+            }
         }
 
 
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
-            // Initialize UI buttons and text to stopped state
-            stoppedSettings();
-            stoppedSettingsSend();
-
-            // Allow visability of variables between main 
-            //and background process.
-            CheckForIllegalCrossThreadCalls = false;
-
-
-            //If message queues do not exist, create them
-            MessageQueue myMessageQueue = null;
-            string myInboundDescription = "IOT Inbound Queue";
-            string myNotificationDescription = "IOT Notification Queue";
-            string myInboundPath = theInboundPath;
-            string myNotificationsPath = theNotificationsPath;
-
-            // IOT Inbound Path 
             try
             {
-                if (MessageQueue.Exists(myInboundPath))
-                {
-                    myMessageQueue = new MessageQueue(myInboundPath);
-                    myMessageQueue.Label = myInboundDescription;
-                }
-                else
-                {
-                    MessageQueue.Create(myInboundPath);
-                    myMessageQueue = new MessageQueue(myInboundPath);
-                    myMessageQueue.Label = myInboundDescription;
-                }
-            }
-            catch(Exception myException)
-            {
-                MessageBox.Show(myException.Message);
-            }
+                // Initialize UI buttons and text to stopped state
+                stoppedSettings();
+                stoppedSettingsSend();
 
-            //IOT Notification Path
-            try
-            {
-                if (MessageQueue.Exists(myNotificationsPath))
-                {
-                    myMessageQueue = new MessageQueue(myNotificationsPath);
-                    myMessageQueue.Label = myNotificationDescription;
-                }
-                else
-                {
-                    MessageQueue.Create(myNotificationsPath);
-                    myMessageQueue = new MessageQueue(myNotificationsPath);
-                    myMessageQueue.Label = myNotificationDescription;
-                }
+                // Allow visability of variables between main 
+                //and background process.
+                CheckForIllegalCrossThreadCalls = false;
+
+                // Create a background process to update queue diagnostics
+                BackgroundWorker myBGQueueDiagnostics = new BackgroundWorker();
+                myBGQueueDiagnostics.DoWork += new DoWorkEventHandler(myBGQueueDiagnostics_DoWork);
+                myBGQueueDiagnostics.RunWorkerCompleted += new RunWorkerCompletedEventHandler(myBGQueueDiagnostics_RunWorkerCompleted);
+                myBGQueueDiagnostics.RunWorkerAsync();
             }
             catch (Exception myException)
             {
-                MessageBox.Show(myException.Message);
+                MessageBox.Show("Error:: " + myException.Message);
             }
-
-
-            // Create a background process to update queue diagnostics
-            BackgroundWorker myBGQueueDiagnostics = new BackgroundWorker();
-            myBGQueueDiagnostics.DoWork += new DoWorkEventHandler(myBGQueueDiagnostics_DoWork);
-            myBGQueueDiagnostics.RunWorkerCompleted += new RunWorkerCompletedEventHandler(myBGQueueDiagnostics_RunWorkerCompleted);
-            myBGQueueDiagnostics.RunWorkerAsync();
         }
 
         // This gets called when the background job completes
@@ -203,31 +202,38 @@ namespace SamplingStartStop
         {
             int myInboundCount = 0;
             int myNotificationCount = 0;
-            
 
-            while (true)
+
+            try
             {
-                // Get the number of messages in the inbound queue, and display results
-                myInboundCount = theInboundMessageQueue.GetAllMessages().Length;
-                textBoxInboundQueueCount.Text = myInboundCount.ToString();
-
-                // Get the number of messages in the inbound queue, and display results
-                myNotificationCount = theNotificationsMessageQueue.GetAllMessages().Length;
-                textBoxNotificationQueueCount.Text = myNotificationCount.ToString();
-
-                //Load Notification messages into the Notifications Listbox
-                listBoxNotifications.Items.Clear();
-                foreach (System.Messaging.Message myMessage in theNotificationsMessageQueue.GetAllMessages())
+                while (true)
                 {
-                    // Display the label of each message.
-                    myMessage.Formatter = new XmlMessageFormatter(new Type[] { typeof(String) });
-                    var myMessageText = (String)myMessage.Body;
-                    listBoxNotifications.Items.Add(myMessageText);
+                    // Get the number of messages in the inbound queue, and display results
+                    myInboundCount = theInboundMessageQueue.GetAllMessages().Length;
+                    textBoxInboundQueueCount.Text = myInboundCount.ToString();
+
+                    // Get the number of messages in the inbound queue, and display results
+                    myNotificationCount = theNotificationsMessageQueue.GetAllMessages().Length;
+                    textBoxNotificationQueueCount.Text = myNotificationCount.ToString();
+
+                    //Load Notification messages into the Notifications Listbox
+                    listBoxNotifications.Items.Clear();
+                    foreach (System.Messaging.Message myMessage in theNotificationsMessageQueue.GetAllMessages())
+                    {
+                        // Display the label of each message.
+                        myMessage.Formatter = new XmlMessageFormatter(new Type[] { typeof(String) });
+                        var myMessageText = (String)myMessage.Body;
+                        listBoxNotifications.Items.Add(myMessageText);
+                    }
+
+
+                    // Sleep before checking again
+                    Thread.Sleep(2000);
                 }
-
-
-                // Sleep before checking again
-                Thread.Sleep(2000);
+            }
+            catch (Exception myException)
+            {
+                MessageBox.Show("Error:: " + myException.Message);
             }
         }
 
@@ -274,14 +280,21 @@ namespace SamplingStartStop
 
         private void buttonThingworxUploadStart_Click(object sender, EventArgs e)
         {
-            // Set the UI setting 
-            startedSettingsSend();
+            try
+            {
+                // Set the UI setting 
+                startedSettingsSend();
 
-            // Create a background process to update queue diagnostics
-            BackgroundWorker myBGThingworxSend = new BackgroundWorker();
-            myBGThingworxSend.DoWork += new DoWorkEventHandler(myBGThingworxSend_DoWork);
-            myBGThingworxSend.RunWorkerCompleted += new RunWorkerCompletedEventHandler(myBGThingworxSend_RunWorkerCompleted);
-            myBGThingworxSend.RunWorkerAsync();
+                // Create a background process to update queue diagnostics
+                BackgroundWorker myBGThingworxSend = new BackgroundWorker();
+                myBGThingworxSend.DoWork += new DoWorkEventHandler(myBGThingworxSend_DoWork);
+                myBGThingworxSend.RunWorkerCompleted += new RunWorkerCompletedEventHandler(myBGThingworxSend_RunWorkerCompleted);
+                myBGThingworxSend.RunWorkerAsync();
+            }
+            catch (Exception myException)
+            {
+                MessageBox.Show("Error:: " + myException.Message);
+            }
         }
 
         // This gets called when the background job completes
@@ -294,18 +307,33 @@ namespace SamplingStartStop
         // This is the routine that does the work for the background process
         private void myBGThingworxSend_DoWork(object sender, DoWorkEventArgs e)
         {
-            while (theContinueSendingFlag && (theInboundMessageQueue.GetAllMessages().Length > 0)) {
-                System.Messaging.Message myMessage = theInboundMessageQueue.Receive();
-                myMessage.Formatter = new XmlMessageFormatter(new Type[] { typeof(String) });
-                var myMessageText = (String)myMessage.Body;
-                MessageBox.Show(myMessageText);
+            try
+            {
+                while (theContinueSendingFlag && (theInboundMessageQueue.GetAllMessages().Length > 0))
+                {
+                    System.Messaging.Message myMessage = theInboundMessageQueue.Receive();
+                    myMessage.Formatter = new XmlMessageFormatter(new Type[] { typeof(String) });
+                    var myMessageText = (String)myMessage.Body;
+                    MessageBox.Show(myMessageText);
+                }
+            }
+            catch (Exception myException)
+            {
+                MessageBox.Show("Error:: " + myException.Message);
             }
         }
 
         private void buttonThingworxUploadStop_Click(object sender, EventArgs e)
         {
-            // Set the flag to stop sending to Thingworx
-            theContinueSendingFlag = false;
+            try
+            {
+                // Set the flag to stop sending to Thingworx
+                theContinueSendingFlag = false;
+            }
+            catch (Exception myException)
+            {
+                MessageBox.Show("Error:: " + myException.Message);
+            }
         }
     }
 }
