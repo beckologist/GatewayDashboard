@@ -92,6 +92,9 @@ namespace SamplingStartStop
                 // Call routine to set UI buttons/text to started state
                 startedSettings();
 
+                // Set the CAN interface buffer size
+                myClient.RunCommand("sudo ifconfig can0 txqueuelen 100000");
+
                 // Run the command on the PI to start sampling
                 myClient.RunCommand("./sample.sh");
                 myClient.Disconnect();
@@ -325,7 +328,7 @@ namespace SamplingStartStop
                     //Split the Thing name from the data
                     string[] myMessageParts = myMessageText.Split('*');
 
-                    var myClient = new RestClient("https:xxxxxxxxx/Thingworx/Things/" + myMessageParts.ElementAt(0) + "/Properties/*");
+                    var myClient = new RestClient("https://xxxxxxxxxxxxxx/Thingworx/Things/" + myMessageParts.ElementAt(0) + "/Properties/*");
                     myClient.Timeout = -1;
                     var myRequest = new RestRequest(Method.PUT);
                     myRequest.AddHeader("AppKey", "xxxxxxxxxxxxxxxxxxx");
@@ -334,7 +337,7 @@ namespace SamplingStartStop
                     myRequest.AddParameter("application/json", myMessageParts.ElementAt(1), ParameterType.RequestBody);
                     IRestResponse response = myClient.Execute(myRequest);
                     Console.WriteLine(response.Content);
-                    //MessageBox.Show(response.Content + "   " + response.StatusCode + "**** " + myMessageParts.ElementAt(1));
+                    //MessageBox.Show(response.Content + "   " + response.StatusCode + "**** " + myMessageParts.ElementAt(0) + "   " + myMessageParts.ElementAt(1));
 
                 }
             }
