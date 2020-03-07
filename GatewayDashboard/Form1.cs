@@ -11,6 +11,8 @@ using Renci.SshNet;
 using System.Threading;
 using System.Messaging;
 using System.Net.Http;
+using System.Net.Http.Headers;
+using RestSharp;
 
 namespace SamplingStartStop
 {
@@ -20,6 +22,7 @@ namespace SamplingStartStop
         static string theUser = "pi";
         static string thePass = "raspberry";
         static string theHost = "10.5.37.222";
+        static int thePort = 5800;
 
         // Constants for working with MSMQ
         static string theInboundPath = @".\private$\IOTData";
@@ -79,7 +82,7 @@ namespace SamplingStartStop
                 startedSettings();
 
                 //Set up the SSH connection
-                var myClient = new SshClient(theHost, theUser, thePass);
+                var myClient = new SshClient(theHost, thePort, theUser, thePass);
                 labelSamplingStatus.Text = "Connecting";
                 labelSamplingStatus.ForeColor = System.Drawing.Color.Orange;
                 myClient.Connect();
@@ -90,7 +93,7 @@ namespace SamplingStartStop
                 startedSettings();
 
                 // Run the command on the PI to start sampling
-                myClient.RunCommand("./StartTest");
+                myClient.RunCommand("./sample.sh");
                 myClient.Disconnect();
             }
             catch (Exception exception)
@@ -261,11 +264,11 @@ namespace SamplingStartStop
             try
             {
                 //Set up the SSH connection
-                var myClient = new SshClient(theHost, theUser, thePass);
+                var myClient = new SshClient(theHost, thePort, theUser, thePass);
                 myClient.Connect();
 
                 // Kill the shell on the PI that running the sampling command
-                myClient.RunCommand("pkill bash");
+                myClient.RunCommand("killall java");
                 myClient.Disconnect();
 
                 //var output = client.RunCommand("pwd");
@@ -281,6 +284,9 @@ namespace SamplingStartStop
         {
             try
             {
+                // Set the flag to stop sending to Thingworx
+                theContinueSendingFlag = true;
+
                 // Set the UI setting 
                 startedSettingsSend();
 
@@ -308,17 +314,41 @@ namespace SamplingStartStop
         {
             try
             {
+                
                 while (theContinueSendingFlag && (theInboundMessageQueue.GetAllMessages().Length > 0))
                 {
+                    //Dequeue a message
                     System.Messaging.Message myMessage = theInboundMessageQueue.Receive();
                     myMessage.Formatter = new XmlMessageFormatter(new Type[] { typeof(String) });
-                    var myMessageText = (String)myMessage.Body;
-                    MessageBox.Show(myMessageText);
+                    string myMessageText = (String)myMessage.Body;
+
+                    //Split the Thing name from the data
+                    string[] myMessageParts = myMessageText.Split('*');
+
+                    var myClient = new RestClient("https:xxxxxxxxx/Thingworx/Things/" + myMessageParts.ElementAt(0) + "/Properties/*");
+                    myClient.Timeout = -1;
+                    var myRequest = new RestRequest(Method.PUT);
+                    myRequest.AddHeader("AppKey", "xxxxxxxxxxxxxxxxxxx");
+                    myRequest.AddHeader("Content-Type", "application/json");
+                    myRequest.AddHeader("Accept", "application/json");
+                    myRequest.AddParameter("application/json", myMessageParts.ElementAt(1), ParameterType.RequestBody);
+                    IRestResponse response = myClient.Execute(myRequest);
+                    Console.WriteLine(response.Content);
+                    //MessageBox.Show(response.Content + "   " + response.StatusCode + "**** " + myMessageParts.ElementAt(1));
+
                 }
+            }
+            catch (HttpRequestException myException)
+            {
+                MessageBox.Show("Error1:: " + myException.Message + "  ::  " + myException.InnerException.Message);
+            }
+            catch (ArgumentNullException myException)
+            {
+                MessageBox.Show("Error2:: " + myException.Message);
             }
             catch (Exception myException)
             {
-                MessageBox.Show("Error:: " + myException.Message);
+                MessageBox.Show("Error3:: " + myException.Message);
             }
         }
 
