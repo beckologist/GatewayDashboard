@@ -42,14 +42,14 @@ namespace SamplingStartStop
         }
 
         // Sampling start button click.  
-        private void buttonSamplingStart_Click(object sender, EventArgs e)
+        private void SamplingStart_Click(object sender, EventArgs e)
         {
             try
             {
                 // Create a background process
                 BackgroundWorker myBG = new BackgroundWorker();
-                myBG.DoWork += new DoWorkEventHandler(myBG_DoWork);
-                myBG.RunWorkerCompleted += new RunWorkerCompletedEventHandler(myBG_RunWorkerCompleted);
+                myBG.DoWork += new DoWorkEventHandler(MyBG_DoWork);
+                myBG.RunWorkerCompleted += new RunWorkerCompletedEventHandler(MyBG_RunWorkerCompleted);
                 myBG.RunWorkerAsync();
             }
             catch (Exception exception)
@@ -60,12 +60,12 @@ namespace SamplingStartStop
         }
 
         // This gets called when the background job completes
-        private void myBG_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        private void MyBG_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             try
             {
                 // Call routine to set UI buttons/text to stopped state
-                stoppedSettings();
+                StoppedSettings();
             }
             catch (Exception exception)
             {
@@ -74,12 +74,12 @@ namespace SamplingStartStop
         }
 
         // This is the routine that does the work for the background process
-        private void myBG_DoWork(object sender, DoWorkEventArgs e)
+        private void MyBG_DoWork(object sender, DoWorkEventArgs e)
         {
             try
             {
                 // Call routine to set UI buttons/text to started state
-                startedSettings();
+                StartedSettings();
 
                 //Set up the SSH connection
                 var myClient = new SshClient(theHost, thePort, theUser, thePass);
@@ -90,10 +90,54 @@ namespace SamplingStartStop
                 //var output = client.RunCommand("pwd");
                 //MessageBox.Show(output.Result);
                 // Call routine to set UI buttons/text to started state
-                startedSettings();
+                StartedSettings();
 
                 // Set the CAN interface buffer size
                 myClient.RunCommand("sudo ifconfig can0 txqueuelen 100000");
+
+                // Build Command String
+                string myCommand = "./sample.sh";
+
+                if (CheckBox1.Checked)
+                {
+                    myCommand = myCommand + " 1";
+                }
+
+                if (CheckBox2.Checked)
+                {
+                    myCommand = myCommand + " 2";
+                }
+
+                if (CheckBox3.Checked)
+                {
+                    myCommand = myCommand + " 3";
+                }
+
+                if (CheckBox4.Checked)
+                {
+                    myCommand = myCommand + " 4";
+                }
+
+                if (CheckBox5.Checked)
+                {
+                    myCommand = myCommand + " 5";
+                }
+
+                if (CheckBox6.Checked)
+                {
+                    myCommand = myCommand + " 6";
+                }
+
+                if (CheckBox7.Checked)
+                {
+                    myCommand = myCommand + " 7";
+                }
+
+                if (CheckBox8.Checked)
+                {
+                    myCommand = myCommand + " 8";
+                }
+                MessageBox.Show(myCommand);
 
                 // Run the command on the PI to start sampling
                 myClient.RunCommand("./sample.sh");
@@ -106,12 +150,12 @@ namespace SamplingStartStop
         }
 
         // Set Sampling UI buttons and text to started state
-        private void startedSettings()
+        private void StartedSettings()
         {
             try
             {
-                buttonSamplingStart.Enabled = false;
-                buttonSamplingStop.Enabled = true;
+                SamplingStart.Enabled = false;
+                SamplingStop.Enabled = true;
                 labelSamplingStatus.Text = "Started";
                 labelSamplingStatus.ForeColor = System.Drawing.Color.Green;
             }
@@ -122,12 +166,12 @@ namespace SamplingStartStop
         }
 
         // Set Thingworx send UI buttons and text to started state
-        private void startedSettingsSend()
+        private void StartedSettingsSend()
         {
             try
             {
-                buttonThingworxUploadStart.Enabled = false;
-                buttonThingworxUploadStop.Enabled = true;
+                ThingworxUploadStart.Enabled = false;
+                ThingworxUploadStop.Enabled = true;
                 labelUploadStatus.Text = "Started";
                 labelUploadStatus.ForeColor = System.Drawing.Color.Green;
             }
@@ -139,12 +183,12 @@ namespace SamplingStartStop
 
 
         // Set UI buttons and text to stopped state
-        private void stoppedSettings()
+        private void StoppedSettings()
         {
             try
             {
-                buttonSamplingStart.Enabled = true;
-                buttonSamplingStop.Enabled = false;
+                SamplingStart.Enabled = true;
+                SamplingStop.Enabled = false;
                 labelSamplingStatus.Text = "Stopped";
                 labelSamplingStatus.ForeColor = System.Drawing.Color.Red;
             }
@@ -155,12 +199,12 @@ namespace SamplingStartStop
         }
 
         // Set Thingworx send UI buttons and text to stopped state
-        private void stoppedSettingsSend()
+        private void StoppedSettingsSend()
         {
             try
             {
-                buttonThingworxUploadStart.Enabled = true;
-                buttonThingworxUploadStop.Enabled = false;
+                ThingworxUploadStart.Enabled = true;
+                ThingworxUploadStop.Enabled = false;
                 labelUploadStatus.Text = "Stopped";
                 labelUploadStatus.ForeColor = System.Drawing.Color.Red;
             }
@@ -177,17 +221,29 @@ namespace SamplingStartStop
             try
             {
                 // Initialize UI buttons and text to stopped state
-                stoppedSettings();
-                stoppedSettingsSend();
+                StoppedSettings();
+                StoppedSettingsSend();
 
                 // Allow visability of variables between main 
                 //and background process.
                 CheckForIllegalCrossThreadCalls = false;
 
+                // Load users configuration
+                CheckBox1.Checked = Properties.Settings.Default.RadioButton1;
+                CheckBox2.Checked = Properties.Settings.Default.RadioButton2;
+                CheckBox3.Checked = Properties.Settings.Default.RadioButton3;
+                CheckBox4.Checked = Properties.Settings.Default.RadioButton4;
+                CheckBox5.Checked = Properties.Settings.Default.RadioButton5;
+                CheckBox6.Checked = Properties.Settings.Default.RadioButton6;
+                CheckBox7.Checked = Properties.Settings.Default.RadioButton7;
+                CheckBox8.Checked = Properties.Settings.Default.RadioButton8;
+                APIKey.Text = Properties.Settings.Default.APIKey;
+                BaseURL.Text = Properties.Settings.Default.BaseURL;
+
                 // Create a background process to update queue diagnostics
                 BackgroundWorker myBGQueueDiagnostics = new BackgroundWorker();
-                myBGQueueDiagnostics.DoWork += new DoWorkEventHandler(myBGQueueDiagnostics_DoWork);
-                myBGQueueDiagnostics.RunWorkerCompleted += new RunWorkerCompletedEventHandler(myBGQueueDiagnostics_RunWorkerCompleted);
+                myBGQueueDiagnostics.DoWork += new DoWorkEventHandler(MyBGQueueDiagnostics_DoWork);
+                myBGQueueDiagnostics.RunWorkerCompleted += new RunWorkerCompletedEventHandler(MyBGQueueDiagnostics_RunWorkerCompleted);
                 myBGQueueDiagnostics.RunWorkerAsync();
             }
             catch (Exception myException)
@@ -197,13 +253,13 @@ namespace SamplingStartStop
         }
 
         // This gets called when the background job completes
-        private void myBGQueueDiagnostics_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        private void MyBGQueueDiagnostics_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
 
         }
 
         // This is the routine that does the work for the background process
-        private void myBGQueueDiagnostics_DoWork(object sender, DoWorkEventArgs e)
+        private void MyBGQueueDiagnostics_DoWork(object sender, DoWorkEventArgs e)
         {
             int myInboundCount = 0;
             int myNotificationCount = 0;
@@ -247,7 +303,7 @@ namespace SamplingStartStop
 
         }
 
-        private void groupBox1_Enter(object sender, EventArgs e)
+        private void GroupBox1_Enter(object sender, EventArgs e)
         {
 
         }
@@ -257,12 +313,12 @@ namespace SamplingStartStop
 
         }
 
-        private void groupBox3_Enter(object sender, EventArgs e)
+        private void GroupBox3_Enter(object sender, EventArgs e)
         {
 
         }
 
-        private void buttonSamplingStop_Click(object sender, EventArgs e)
+        private void SamplingStop_Click(object sender, EventArgs e)
         {
             try
             {
@@ -283,7 +339,7 @@ namespace SamplingStartStop
             }
         }
 
-        private void buttonThingworxUploadStart_Click(object sender, EventArgs e)
+        private void ThingworxUploadStart_Click(object sender, EventArgs e)
         {
             try
             {
@@ -291,12 +347,12 @@ namespace SamplingStartStop
                 theContinueSendingFlag = true;
 
                 // Set the UI setting 
-                startedSettingsSend();
+                StartedSettingsSend();
 
                 // Create a background process to update queue diagnostics
                 BackgroundWorker myBGThingworxSend = new BackgroundWorker();
-                myBGThingworxSend.DoWork += new DoWorkEventHandler(myBGThingworxSend_DoWork);
-                myBGThingworxSend.RunWorkerCompleted += new RunWorkerCompletedEventHandler(myBGThingworxSend_RunWorkerCompleted);
+                myBGThingworxSend.DoWork += new DoWorkEventHandler(MyBGThingworxSend_DoWork);
+                myBGThingworxSend.RunWorkerCompleted += new RunWorkerCompletedEventHandler(MyBGThingworxSend_RunWorkerCompleted);
                 myBGThingworxSend.RunWorkerAsync();
             }
             catch (Exception myException)
@@ -306,18 +362,18 @@ namespace SamplingStartStop
         }
 
         // This gets called when the background job completes
-        private void myBGThingworxSend_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        private void MyBGThingworxSend_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             // Change the UI settings
-            stoppedSettingsSend();
+            StoppedSettingsSend();
         }
 
         // This is the routine that does the work for the background process
-        private void myBGThingworxSend_DoWork(object sender, DoWorkEventArgs e)
+        private void MyBGThingworxSend_DoWork(object sender, DoWorkEventArgs e)
         {
+       
             try
             {
-                
                 while (theContinueSendingFlag && (theInboundMessageQueue.GetAllMessages().Length > 0))
                 {
                     //Dequeue a message
@@ -328,16 +384,20 @@ namespace SamplingStartStop
                     //Split the Thing name from the data
                     string[] myMessageParts = myMessageText.Split('*');
 
-                    var myClient = new RestClient("https://xxxxxxxxxxxxxx/Thingworx/Things/" + myMessageParts.ElementAt(0) + "/Properties/*");
+                    //var myClient = new RestClient("https://pp-2003021532te.devportal.ptc.io/Thingworx/Things/" + myMessageParts.ElementAt(0) + "/Properties/*");
+                    var myClient = new RestClient(BaseURL.Text + "/Thingworx/Things/" + myMessageParts.ElementAt(0) + "/Properties/*");
+                    //MessageBox.Show(BaseURL.Text + "/Thingworx/Things/" + myMessageParts.ElementAt(0) + "/Properties/*");
+
                     myClient.Timeout = -1;
                     var myRequest = new RestRequest(Method.PUT);
-                    myRequest.AddHeader("AppKey", "xxxxxxxxxxxxxxxxxxx");
+                    myRequest.AddHeader("AppKey", APIKey.Text);
+                    //myRequest.AddHeader("AppKey", "45fc7688-5832-494f-8423-847c7e98eb65");
                     myRequest.AddHeader("Content-Type", "application/json");
                     myRequest.AddHeader("Accept", "application/json");
                     myRequest.AddParameter("application/json", myMessageParts.ElementAt(1), ParameterType.RequestBody);
                     IRestResponse response = myClient.Execute(myRequest);
                     Console.WriteLine(response.Content);
-                    //MessageBox.Show(response.Content + "   " + response.StatusCode + "**** " + myMessageParts.ElementAt(0) + "   " + myMessageParts.ElementAt(1));
+                    MessageBox.Show(response.Content + "   " + response.StatusCode + "**** " + myMessageParts.ElementAt(0) + "   " + myMessageParts.ElementAt(1));
 
                 }
             }
@@ -355,7 +415,7 @@ namespace SamplingStartStop
             }
         }
 
-        private void buttonThingworxUploadStop_Click(object sender, EventArgs e)
+        private void ThingworxUploadStop_Click(object sender, EventArgs e)
         {
             try
             {
@@ -368,6 +428,84 @@ namespace SamplingStartStop
             }
         }
 
- 
+        private void label1_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label1_Click_2(object sender, EventArgs e)
+        {
+
+        }
+
+        private void APIKey_TextChanged(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.APIKey = APIKey.Text;
+            Properties.Settings.Default.Save();
+        }
+
+        private void BaseURL_TextChanged(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.BaseURL = BaseURL.Text;
+            Properties.Settings.Default.Save();
+        }
+
+        private void CheckBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.RadioButton1 = CheckBox1.Checked;
+            Properties.Settings.Default.Save();
+        }
+
+        private void CheckBox2_CheckedChanged(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.RadioButton2 = CheckBox2.Checked;
+            Properties.Settings.Default.Save();
+        }
+
+        private void CheckBox3_CheckedChanged(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.RadioButton3 = CheckBox3.Checked;
+            Properties.Settings.Default.Save();
+        }
+
+        private void CheckBox4_CheckedChanged(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.RadioButton4 = CheckBox4.Checked;
+            Properties.Settings.Default.Save();
+        }
+
+        private void CheckBox5_CheckedChanged(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.RadioButton5 = CheckBox5.Checked;
+            Properties.Settings.Default.Save();
+        }
+
+        private void CheckBox6_CheckedChanged(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.RadioButton6 = CheckBox6.Checked;
+            Properties.Settings.Default.Save();
+        }
+
+        private void CheckBox7_CheckedChanged(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.RadioButton7 = CheckBox7.Checked;
+            Properties.Settings.Default.Save();
+        }
+
+        private void CheckBox8_CheckedChanged(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.RadioButton8 = CheckBox8.Checked;
+            Properties.Settings.Default.Save();
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Label3Sponsors_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
