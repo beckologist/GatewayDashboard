@@ -149,7 +149,7 @@ namespace SamplingStartStop
                 //MessageBox.Show(myCommand);
 
                 // Run the command on the PI to start sampling
-                myClient.RunCommand("./sample.sh");
+                myClient.RunCommand(myCommand);
                 myClient.Disconnect();
             }
             catch (Exception exception)
@@ -167,6 +167,7 @@ namespace SamplingStartStop
                 SamplingStop.Enabled = true;
                 labelSamplingStatus.Text = "Started";
                 labelSamplingStatus.ForeColor = System.Drawing.Color.Green;
+                settingsToolStripMenuItem.Enabled = false;
             }
             catch (Exception myException)
             {
@@ -183,6 +184,7 @@ namespace SamplingStartStop
                 ThingworxUploadStop.Enabled = true;
                 labelUploadStatus.Text = "Started";
                 labelUploadStatus.ForeColor = System.Drawing.Color.Green;
+                settingsToolStripMenuItem.Enabled = false;
             }
             catch (Exception myException)
             {
@@ -200,6 +202,7 @@ namespace SamplingStartStop
                 SamplingStop.Enabled = false;
                 labelSamplingStatus.Text = "Stopped";
                 labelSamplingStatus.ForeColor = System.Drawing.Color.Red;
+                settingsToolStripMenuItem.Enabled = true;
             }
             catch (Exception myException)
             {
@@ -216,6 +219,7 @@ namespace SamplingStartStop
                 ThingworxUploadStop.Enabled = false;
                 labelUploadStatus.Text = "Stopped";
                 labelUploadStatus.ForeColor = System.Drawing.Color.Red;
+                settingsToolStripMenuItem.Enabled = true;
             }
             catch (Exception myException)
             {
@@ -382,7 +386,7 @@ namespace SamplingStartStop
                     string[] myMessageParts = myMessageText.Split('*');
 
                     //var myClient = new RestClient("https://pp-2003021532te.devportal.ptc.io/Thingworx/Things/" + myMessageParts.ElementAt(0) + "/Properties/*");
-                    var myClient = new RestClient("https://"+ Properties.Settings.Default.BaseURL + "/Thingworx/Things/" + myMessageParts.ElementAt(0) + "/Properties/*");
+                    var myClient = new RestClient(Properties.Settings.Default.BaseURL + "/Thingworx/Things/" + myMessageParts.ElementAt(0) + "/Properties/*");
                     //MessageBox.Show("https://" + Properties.Settings.Default.BaseURL + "/Thingworx/Things/" + myMessageParts.ElementAt(0) + "/Properties/*");
 
                     myClient.Timeout = -1;
