@@ -145,7 +145,7 @@ namespace SamplingStartStop.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("pi")]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
         public string EDUsername {
             get {
                 return ((string)(this["EDUsername"]));
@@ -157,7 +157,7 @@ namespace SamplingStartStop.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("raspberry")]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
         public string EDPassword {
             get {
                 return ((string)(this["EDPassword"]));
@@ -169,7 +169,7 @@ namespace SamplingStartStop.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("10.5.37.222")]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
         public string EDIPAddress {
             get {
                 return ((string)(this["EDIPAddress"]));
@@ -181,13 +181,49 @@ namespace SamplingStartStop.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("5800")]
-        public string EDPort {
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int EDPort {
             get {
-                return ((string)(this["EDPort"]));
+                return ((int)(this["EDPort"]));
             }
             set {
                 this["EDPort"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string BrokerAPIKey {
+            get {
+                return ((string)(this["BrokerAPIKey"]));
+            }
+            set {
+                this["BrokerAPIKey"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string BrokerIPAddress {
+            get {
+                return ((string)(this["BrokerIPAddress"]));
+            }
+            set {
+                this["BrokerIPAddress"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int BrokerPort {
+            get {
+                return ((int)(this["BrokerPort"]));
+            }
+            set {
+                this["BrokerPort"] = value;
             }
         }
     }

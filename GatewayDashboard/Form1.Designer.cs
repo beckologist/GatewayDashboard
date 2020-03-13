@@ -34,21 +34,7 @@
             this.labelMotorSampling = new System.Windows.Forms.Label();
             this.labelSamplingStatus = new System.Windows.Forms.Label();
             this.GroupBoxMotorSampling = new System.Windows.Forms.GroupBox();
-            this.GroupBox1 = new System.Windows.Forms.GroupBox();
-            this.CheckBox8 = new System.Windows.Forms.CheckBox();
-            this.CheckBox7 = new System.Windows.Forms.CheckBox();
-            this.CheckBox6 = new System.Windows.Forms.CheckBox();
-            this.CheckBox5 = new System.Windows.Forms.CheckBox();
-            this.CheckBox4 = new System.Windows.Forms.CheckBox();
-            this.CheckBox3 = new System.Windows.Forms.CheckBox();
-            this.CheckBox2 = new System.Windows.Forms.CheckBox();
-            this.CheckBox1 = new System.Windows.Forms.CheckBox();
             this.GroupBoxThingworxUpload = new System.Windows.Forms.GroupBox();
-            this.GroupBox2 = new System.Windows.Forms.GroupBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.BaseURL = new System.Windows.Forms.TextBox();
-            this.APIKey = new System.Windows.Forms.TextBox();
             this.ThingworxUploadStop = new System.Windows.Forms.Button();
             this.ThingworxUploadStart = new System.Windows.Forms.Button();
             this.labelUploadStatus = new System.Windows.Forms.Label();
@@ -71,9 +57,7 @@
             this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.GroupBoxMotorSampling.SuspendLayout();
-            this.GroupBox1.SuspendLayout();
             this.GroupBoxThingworxUpload.SuspendLayout();
-            this.GroupBox2.SuspendLayout();
             this.groupBoxDiagnostics.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -128,7 +112,6 @@
             // GroupBoxMotorSampling
             // 
             this.GroupBoxMotorSampling.BackColor = System.Drawing.SystemColors.Control;
-            this.GroupBoxMotorSampling.Controls.Add(this.GroupBox1);
             this.GroupBoxMotorSampling.Controls.Add(this.labelSamplingStatus);
             this.GroupBoxMotorSampling.Controls.Add(this.SamplingStart);
             this.GroupBoxMotorSampling.Controls.Add(this.labelMotorSampling);
@@ -136,122 +119,15 @@
             this.GroupBoxMotorSampling.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.GroupBoxMotorSampling.Location = new System.Drawing.Point(28, 50);
             this.GroupBoxMotorSampling.Name = "GroupBoxMotorSampling";
-            this.GroupBoxMotorSampling.Size = new System.Drawing.Size(360, 286);
+            this.GroupBoxMotorSampling.Size = new System.Drawing.Size(360, 185);
             this.GroupBoxMotorSampling.TabIndex = 4;
             this.GroupBoxMotorSampling.TabStop = false;
             this.GroupBoxMotorSampling.Text = "Motor Sampling";
             this.GroupBoxMotorSampling.Enter += new System.EventHandler(this.GroupBox1_Enter);
             // 
-            // GroupBox1
-            // 
-            this.GroupBox1.Controls.Add(this.CheckBox8);
-            this.GroupBox1.Controls.Add(this.CheckBox7);
-            this.GroupBox1.Controls.Add(this.CheckBox6);
-            this.GroupBox1.Controls.Add(this.CheckBox5);
-            this.GroupBox1.Controls.Add(this.CheckBox4);
-            this.GroupBox1.Controls.Add(this.CheckBox3);
-            this.GroupBox1.Controls.Add(this.CheckBox2);
-            this.GroupBox1.Controls.Add(this.CheckBox1);
-            this.GroupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.GroupBox1.Location = new System.Drawing.Point(6, 205);
-            this.GroupBox1.Name = "GroupBox1";
-            this.GroupBox1.Size = new System.Drawing.Size(348, 70);
-            this.GroupBox1.TabIndex = 4;
-            this.GroupBox1.TabStop = false;
-            this.GroupBox1.Text = "Motors to Include";
-            // 
-            // CheckBox8
-            // 
-            this.CheckBox8.AutoSize = true;
-            this.CheckBox8.Location = new System.Drawing.Point(302, 26);
-            this.CheckBox8.Name = "CheckBox8";
-            this.CheckBox8.Size = new System.Drawing.Size(36, 22);
-            this.CheckBox8.TabIndex = 7;
-            this.CheckBox8.Text = "8";
-            this.CheckBox8.UseVisualStyleBackColor = true;
-            this.CheckBox8.CheckedChanged += new System.EventHandler(this.CheckBox8_CheckedChanged);
-            // 
-            // CheckBox7
-            // 
-            this.CheckBox7.AutoSize = true;
-            this.CheckBox7.Location = new System.Drawing.Point(260, 26);
-            this.CheckBox7.Name = "CheckBox7";
-            this.CheckBox7.Size = new System.Drawing.Size(36, 22);
-            this.CheckBox7.TabIndex = 6;
-            this.CheckBox7.Text = "7";
-            this.CheckBox7.UseVisualStyleBackColor = true;
-            this.CheckBox7.CheckedChanged += new System.EventHandler(this.CheckBox7_CheckedChanged);
-            // 
-            // CheckBox6
-            // 
-            this.CheckBox6.AutoSize = true;
-            this.CheckBox6.Location = new System.Drawing.Point(218, 26);
-            this.CheckBox6.Name = "CheckBox6";
-            this.CheckBox6.Size = new System.Drawing.Size(36, 22);
-            this.CheckBox6.TabIndex = 5;
-            this.CheckBox6.Text = "6";
-            this.CheckBox6.UseVisualStyleBackColor = true;
-            this.CheckBox6.CheckedChanged += new System.EventHandler(this.CheckBox6_CheckedChanged);
-            // 
-            // CheckBox5
-            // 
-            this.CheckBox5.AutoSize = true;
-            this.CheckBox5.Location = new System.Drawing.Point(176, 26);
-            this.CheckBox5.Name = "CheckBox5";
-            this.CheckBox5.Size = new System.Drawing.Size(36, 22);
-            this.CheckBox5.TabIndex = 4;
-            this.CheckBox5.Text = "5";
-            this.CheckBox5.UseVisualStyleBackColor = true;
-            this.CheckBox5.CheckedChanged += new System.EventHandler(this.CheckBox5_CheckedChanged);
-            // 
-            // CheckBox4
-            // 
-            this.CheckBox4.AutoSize = true;
-            this.CheckBox4.Location = new System.Drawing.Point(134, 26);
-            this.CheckBox4.Name = "CheckBox4";
-            this.CheckBox4.Size = new System.Drawing.Size(36, 22);
-            this.CheckBox4.TabIndex = 3;
-            this.CheckBox4.Text = "4";
-            this.CheckBox4.UseVisualStyleBackColor = true;
-            this.CheckBox4.CheckedChanged += new System.EventHandler(this.CheckBox4_CheckedChanged);
-            // 
-            // CheckBox3
-            // 
-            this.CheckBox3.AutoSize = true;
-            this.CheckBox3.Location = new System.Drawing.Point(92, 26);
-            this.CheckBox3.Name = "CheckBox3";
-            this.CheckBox3.Size = new System.Drawing.Size(36, 22);
-            this.CheckBox3.TabIndex = 2;
-            this.CheckBox3.Text = "3";
-            this.CheckBox3.UseVisualStyleBackColor = true;
-            this.CheckBox3.CheckedChanged += new System.EventHandler(this.CheckBox3_CheckedChanged);
-            // 
-            // CheckBox2
-            // 
-            this.CheckBox2.AutoSize = true;
-            this.CheckBox2.Location = new System.Drawing.Point(50, 26);
-            this.CheckBox2.Name = "CheckBox2";
-            this.CheckBox2.Size = new System.Drawing.Size(36, 22);
-            this.CheckBox2.TabIndex = 1;
-            this.CheckBox2.Text = "2";
-            this.CheckBox2.UseVisualStyleBackColor = true;
-            this.CheckBox2.CheckedChanged += new System.EventHandler(this.CheckBox2_CheckedChanged);
-            // 
-            // CheckBox1
-            // 
-            this.CheckBox1.AutoSize = true;
-            this.CheckBox1.Location = new System.Drawing.Point(7, 26);
-            this.CheckBox1.Name = "CheckBox1";
-            this.CheckBox1.Size = new System.Drawing.Size(36, 22);
-            this.CheckBox1.TabIndex = 0;
-            this.CheckBox1.Text = "1";
-            this.CheckBox1.UseVisualStyleBackColor = true;
-            this.CheckBox1.CheckedChanged += new System.EventHandler(this.CheckBox1_CheckedChanged);
-            // 
             // GroupBoxThingworxUpload
             // 
             this.GroupBoxThingworxUpload.BackColor = System.Drawing.SystemColors.Control;
-            this.GroupBoxThingworxUpload.Controls.Add(this.GroupBox2);
             this.GroupBoxThingworxUpload.Controls.Add(this.ThingworxUploadStop);
             this.GroupBoxThingworxUpload.Controls.Add(this.ThingworxUploadStart);
             this.GroupBoxThingworxUpload.Controls.Add(this.labelUploadStatus);
@@ -259,62 +135,10 @@
             this.GroupBoxThingworxUpload.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.GroupBoxThingworxUpload.Location = new System.Drawing.Point(417, 50);
             this.GroupBoxThingworxUpload.Name = "GroupBoxThingworxUpload";
-            this.GroupBoxThingworxUpload.Size = new System.Drawing.Size(360, 286);
+            this.GroupBoxThingworxUpload.Size = new System.Drawing.Size(360, 185);
             this.GroupBoxThingworxUpload.TabIndex = 5;
             this.GroupBoxThingworxUpload.TabStop = false;
             this.GroupBoxThingworxUpload.Text = "Thingworx Upload";
-            // 
-            // GroupBox2
-            // 
-            this.GroupBox2.Controls.Add(this.label2);
-            this.GroupBox2.Controls.Add(this.label1);
-            this.GroupBox2.Controls.Add(this.BaseURL);
-            this.GroupBox2.Controls.Add(this.APIKey);
-            this.GroupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.GroupBox2.Location = new System.Drawing.Point(7, 156);
-            this.GroupBox2.Name = "GroupBox2";
-            this.GroupBox2.Size = new System.Drawing.Size(347, 124);
-            this.GroupBox2.TabIndex = 7;
-            this.GroupBox2.TabStop = false;
-            this.GroupBox2.Text = "Connection Configuration";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(17, 74);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(80, 17);
-            this.label2.TabIndex = 3;
-            this.label2.Text = "Base URL";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(17, 21);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(59, 17);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "APIKey";
-            this.label1.Click += new System.EventHandler(this.label1_Click_2);
-            // 
-            // BaseURL
-            // 
-            this.BaseURL.Location = new System.Drawing.Point(20, 94);
-            this.BaseURL.Name = "BaseURL";
-            this.BaseURL.Size = new System.Drawing.Size(295, 24);
-            this.BaseURL.TabIndex = 1;
-            this.BaseURL.TextChanged += new System.EventHandler(this.BaseURL_TextChanged);
-            // 
-            // APIKey
-            // 
-            this.APIKey.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.APIKey.Location = new System.Drawing.Point(20, 41);
-            this.APIKey.Name = "APIKey";
-            this.APIKey.Size = new System.Drawing.Size(295, 24);
-            this.APIKey.TabIndex = 0;
-            this.APIKey.TextChanged += new System.EventHandler(this.APIKey_TextChanged);
             // 
             // ThingworxUploadStop
             // 
@@ -376,9 +200,9 @@
             this.groupBoxDiagnostics.Controls.Add(this.labelNotificationQueueCount);
             this.groupBoxDiagnostics.Controls.Add(this.labelInboundQueueCount);
             this.groupBoxDiagnostics.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBoxDiagnostics.Location = new System.Drawing.Point(28, 342);
+            this.groupBoxDiagnostics.Location = new System.Drawing.Point(28, 252);
             this.groupBoxDiagnostics.Name = "groupBoxDiagnostics";
-            this.groupBoxDiagnostics.Size = new System.Drawing.Size(769, 190);
+            this.groupBoxDiagnostics.Size = new System.Drawing.Size(749, 190);
             this.groupBoxDiagnostics.TabIndex = 7;
             this.groupBoxDiagnostics.TabStop = false;
             this.groupBoxDiagnostics.Text = "Diagnostics";
@@ -446,7 +270,7 @@
             // 
             this.pictureBox1.BackColor = System.Drawing.Color.Red;
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(804, 12);
+            this.pictureBox1.Location = new System.Drawing.Point(804, 50);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(249, 93);
             this.pictureBox1.TabIndex = 8;
@@ -457,7 +281,7 @@
             // 
             this.pictureBox2.BackColor = System.Drawing.Color.White;
             this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
-            this.pictureBox2.Location = new System.Drawing.Point(806, 284);
+            this.pictureBox2.Location = new System.Drawing.Point(804, 215);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(247, 55);
             this.pictureBox2.TabIndex = 9;
@@ -466,7 +290,7 @@
             // pictureBox3
             // 
             this.pictureBox3.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox3.Image")));
-            this.pictureBox3.Location = new System.Drawing.Point(806, 358);
+            this.pictureBox3.Location = new System.Drawing.Point(804, 289);
             this.pictureBox3.Name = "pictureBox3";
             this.pictureBox3.Size = new System.Drawing.Size(247, 63);
             this.pictureBox3.TabIndex = 10;
@@ -475,7 +299,7 @@
             // pictureBox4
             // 
             this.pictureBox4.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox4.Image")));
-            this.pictureBox4.Location = new System.Drawing.Point(806, 441);
+            this.pictureBox4.Location = new System.Drawing.Point(804, 372);
             this.pictureBox4.Name = "pictureBox4";
             this.pictureBox4.Size = new System.Drawing.Size(247, 70);
             this.pictureBox4.TabIndex = 11;
@@ -485,7 +309,7 @@
             // 
             this.Label3Sponsors.AutoSize = true;
             this.Label3Sponsors.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Label3Sponsors.Location = new System.Drawing.Point(823, 231);
+            this.Label3Sponsors.Location = new System.Drawing.Point(821, 162);
             this.Label3Sponsors.Name = "Label3Sponsors";
             this.Label3Sponsors.Size = new System.Drawing.Size(207, 33);
             this.Label3Sponsors.TabIndex = 12;
@@ -514,7 +338,7 @@
             // settingsToolStripMenuItem
             // 
             this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
-            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
             this.settingsToolStripMenuItem.Text = "Settings";
             this.settingsToolStripMenuItem.Click += new System.EventHandler(this.settingsToolStripMenuItem_Click);
             // 
@@ -530,7 +354,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Snow;
-            this.ClientSize = new System.Drawing.Size(1065, 544);
+            this.ClientSize = new System.Drawing.Size(1065, 463);
             this.Controls.Add(this.Label3Sponsors);
             this.Controls.Add(this.pictureBox4);
             this.Controls.Add(this.pictureBox3);
@@ -546,12 +370,8 @@
             this.Load += new System.EventHandler(this.Form1_Load);
             this.GroupBoxMotorSampling.ResumeLayout(false);
             this.GroupBoxMotorSampling.PerformLayout();
-            this.GroupBox1.ResumeLayout(false);
-            this.GroupBox1.PerformLayout();
             this.GroupBoxThingworxUpload.ResumeLayout(false);
             this.GroupBoxThingworxUpload.PerformLayout();
-            this.GroupBox2.ResumeLayout(false);
-            this.GroupBox2.PerformLayout();
             this.groupBoxDiagnostics.ResumeLayout(false);
             this.groupBoxDiagnostics.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
@@ -585,20 +405,6 @@
         private System.Windows.Forms.TextBox textBoxInboundQueueCount;
         private System.Windows.Forms.Label labelNotificationsList;
         private System.Windows.Forms.ListBox listBoxNotifications;
-        private System.Windows.Forms.GroupBox GroupBox1;
-        private System.Windows.Forms.GroupBox GroupBox2;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox BaseURL;
-        private System.Windows.Forms.TextBox APIKey;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.CheckBox CheckBox8;
-        private System.Windows.Forms.CheckBox CheckBox7;
-        private System.Windows.Forms.CheckBox CheckBox6;
-        private System.Windows.Forms.CheckBox CheckBox5;
-        private System.Windows.Forms.CheckBox CheckBox4;
-        private System.Windows.Forms.CheckBox CheckBox3;
-        private System.Windows.Forms.CheckBox CheckBox2;
-        private System.Windows.Forms.CheckBox CheckBox1;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.PictureBox pictureBox3;

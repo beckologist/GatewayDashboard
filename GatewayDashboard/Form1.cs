@@ -20,10 +20,14 @@ namespace SamplingStartStop
     public partial class Form1 : Form
     {
         // Connection info for Raspberry PI
-        static string theUser = "pi";
-        static string thePass = "raspberry";
-        static string theHost = "10.5.37.222";
-        static int thePort = 5800;
+        //static string theUser = "pi";
+        static string theUser = Properties.Settings.Default.EDUsername;
+        //static string thePass = "raspberry";
+        static string thePass = Properties.Settings.Default.EDPassword;
+        //static string theHost = "10.5.37.222";
+        static string theHost = Properties.Settings.Default.EDIPAddress;
+        //static int thePort = 5800;
+        static int thePort = Properties.Settings.Default.EDPort;
 
         // Constants for working with MSMQ
         static string theInboundPath = @".\private$\IOTData";
@@ -96,49 +100,53 @@ namespace SamplingStartStop
                 // Set the CAN interface buffer size
                 myClient.RunCommand("sudo ifconfig can0 txqueuelen 100000");
 
-                // Build Command String
+                // Build Command String with ars
                 string myCommand = "./sample.sh";
 
-                if (CheckBox1.Checked)
+                myCommand = myCommand + " " + Properties.Settings.Default.BrokerIPAddress;
+                myCommand = myCommand + " " + Properties.Settings.Default.BrokerPort;
+                myCommand = myCommand + " " + Properties.Settings.Default.BrokerAPIKey;
+
+                if (Properties.Settings.Default.RadioButton1)
                 {
                     myCommand = myCommand + " 1";
                 }
 
-                if (CheckBox2.Checked)
+                if (Properties.Settings.Default.RadioButton2)
                 {
                     myCommand = myCommand + " 2";
                 }
 
-                if (CheckBox3.Checked)
+                if (Properties.Settings.Default.RadioButton3)
                 {
                     myCommand = myCommand + " 3";
                 }
 
-                if (CheckBox4.Checked)
+                if (Properties.Settings.Default.RadioButton4)
                 {
                     myCommand = myCommand + " 4";
                 }
 
-                if (CheckBox5.Checked)
+                if (Properties.Settings.Default.RadioButton5)
                 {
                     myCommand = myCommand + " 5";
                 }
 
-                if (CheckBox6.Checked)
+                if (Properties.Settings.Default.RadioButton6)
                 {
                     myCommand = myCommand + " 6";
                 }
 
-                if (CheckBox7.Checked)
+                if (Properties.Settings.Default.RadioButton7)
                 {
                     myCommand = myCommand + " 7";
                 }
 
-                if (CheckBox8.Checked)
+                if (Properties.Settings.Default.RadioButton8)
                 {
                     myCommand = myCommand + " 8";
                 }
-                MessageBox.Show(myCommand);
+                //MessageBox.Show(myCommand);
 
                 // Run the command on the PI to start sampling
                 myClient.RunCommand("./sample.sh");
@@ -228,18 +236,6 @@ namespace SamplingStartStop
                 // Allow visability of variables between main 
                 //and background process.
                 CheckForIllegalCrossThreadCalls = false;
-
-                // Load users configuration
-                CheckBox1.Checked = Properties.Settings.Default.RadioButton1;
-                CheckBox2.Checked = Properties.Settings.Default.RadioButton2;
-                CheckBox3.Checked = Properties.Settings.Default.RadioButton3;
-                CheckBox4.Checked = Properties.Settings.Default.RadioButton4;
-                CheckBox5.Checked = Properties.Settings.Default.RadioButton5;
-                CheckBox6.Checked = Properties.Settings.Default.RadioButton6;
-                CheckBox7.Checked = Properties.Settings.Default.RadioButton7;
-                CheckBox8.Checked = Properties.Settings.Default.RadioButton8;
-                APIKey.Text = Properties.Settings.Default.APIKey;
-                BaseURL.Text = Properties.Settings.Default.BaseURL;
 
                 // Create a background process to update queue diagnostics
                 BackgroundWorker myBGQueueDiagnostics = new BackgroundWorker();
@@ -386,19 +382,19 @@ namespace SamplingStartStop
                     string[] myMessageParts = myMessageText.Split('*');
 
                     //var myClient = new RestClient("https://pp-2003021532te.devportal.ptc.io/Thingworx/Things/" + myMessageParts.ElementAt(0) + "/Properties/*");
-                    var myClient = new RestClient(BaseURL.Text + "/Thingworx/Things/" + myMessageParts.ElementAt(0) + "/Properties/*");
-                    //MessageBox.Show(BaseURL.Text + "/Thingworx/Things/" + myMessageParts.ElementAt(0) + "/Properties/*");
+                    var myClient = new RestClient("https://"+ Properties.Settings.Default.BaseURL + "/Thingworx/Things/" + myMessageParts.ElementAt(0) + "/Properties/*");
+                    //MessageBox.Show("https://" + Properties.Settings.Default.BaseURL + "/Thingworx/Things/" + myMessageParts.ElementAt(0) + "/Properties/*");
 
                     myClient.Timeout = -1;
                     var myRequest = new RestRequest(Method.PUT);
-                    myRequest.AddHeader("AppKey", APIKey.Text);
+                    myRequest.AddHeader("AppKey", Properties.Settings.Default.APIKey);
                     //myRequest.AddHeader("AppKey", "45fc7688-5832-494f-8423-847c7e98eb65");
                     myRequest.AddHeader("Content-Type", "application/json");
                     myRequest.AddHeader("Accept", "application/json");
                     myRequest.AddParameter("application/json", myMessageParts.ElementAt(1), ParameterType.RequestBody);
                     IRestResponse response = myClient.Execute(myRequest);
                     Console.WriteLine(response.Content);
-                    MessageBox.Show(response.Content + "   " + response.StatusCode + "**** " + myMessageParts.ElementAt(0) + "   " + myMessageParts.ElementAt(1));
+                    //MessageBox.Show(response.Content + "   " + response.StatusCode + "**** " + myMessageParts.ElementAt(0) + "   " + myMessageParts.ElementAt(1));
 
                 }
             }
@@ -439,66 +435,6 @@ namespace SamplingStartStop
 
         }
 
-        private void APIKey_TextChanged(object sender, EventArgs e)
-        {
-            Properties.Settings.Default.APIKey = APIKey.Text;
-            Properties.Settings.Default.Save();
-        }
-
-        private void BaseURL_TextChanged(object sender, EventArgs e)
-        {
-            Properties.Settings.Default.BaseURL = BaseURL.Text;
-            Properties.Settings.Default.Save();
-        }
-
-        private void CheckBox1_CheckedChanged(object sender, EventArgs e)
-        {
-            Properties.Settings.Default.RadioButton1 = CheckBox1.Checked;
-            Properties.Settings.Default.Save();
-        }
-
-        private void CheckBox2_CheckedChanged(object sender, EventArgs e)
-        {
-            Properties.Settings.Default.RadioButton2 = CheckBox2.Checked;
-            Properties.Settings.Default.Save();
-        }
-
-        private void CheckBox3_CheckedChanged(object sender, EventArgs e)
-        {
-            Properties.Settings.Default.RadioButton3 = CheckBox3.Checked;
-            Properties.Settings.Default.Save();
-        }
-
-        private void CheckBox4_CheckedChanged(object sender, EventArgs e)
-        {
-            Properties.Settings.Default.RadioButton4 = CheckBox4.Checked;
-            Properties.Settings.Default.Save();
-        }
-
-        private void CheckBox5_CheckedChanged(object sender, EventArgs e)
-        {
-            Properties.Settings.Default.RadioButton5 = CheckBox5.Checked;
-            Properties.Settings.Default.Save();
-        }
-
-        private void CheckBox6_CheckedChanged(object sender, EventArgs e)
-        {
-            Properties.Settings.Default.RadioButton6 = CheckBox6.Checked;
-            Properties.Settings.Default.Save();
-        }
-
-        private void CheckBox7_CheckedChanged(object sender, EventArgs e)
-        {
-            Properties.Settings.Default.RadioButton7 = CheckBox7.Checked;
-            Properties.Settings.Default.Save();
-        }
-
-        private void CheckBox8_CheckedChanged(object sender, EventArgs e)
-        {
-            Properties.Settings.Default.RadioButton8 = CheckBox8.Checked;
-            Properties.Settings.Default.Save();
-        }
-
         private void pictureBox1_Click(object sender, EventArgs e)
         {
 
@@ -519,7 +455,11 @@ namespace SamplingStartStop
         {
             Form2 mySettingsForm = new Form2();
             mySettingsForm.ShowDialog();
-        }  
-        
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

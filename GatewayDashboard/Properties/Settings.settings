@@ -33,16 +33,25 @@
       <Value Profile="(Default)" />
     </Setting>
     <Setting Name="EDUsername" Type="System.String" Scope="User">
-      <Value Profile="(Default)">pi</Value>
+      <Value Profile="(Default)" />
     </Setting>
     <Setting Name="EDPassword" Type="System.String" Scope="User">
-      <Value Profile="(Default)">raspberry</Value>
+      <Value Profile="(Default)" />
     </Setting>
     <Setting Name="EDIPAddress" Type="System.String" Scope="User">
-      <Value Profile="(Default)">10.5.37.222</Value>
+      <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="EDPort" Type="System.String" Scope="User">
-      <Value Profile="(Default)">5800</Value>
+    <Setting Name="EDPort" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="BrokerAPIKey" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="BrokerIPAddress" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="BrokerPort" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
     </Setting>
   </Settings>
 </SettingsFile>
