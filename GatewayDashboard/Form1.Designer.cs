@@ -66,6 +66,10 @@
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.pictureBox4 = new System.Windows.Forms.PictureBox();
             this.Label3Sponsors = new System.Windows.Forms.Label();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.ConfigurationToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.GroupBoxMotorSampling.SuspendLayout();
             this.GroupBox1.SuspendLayout();
             this.GroupBoxThingworxUpload.SuspendLayout();
@@ -75,6 +79,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // SamplingStart
@@ -129,9 +134,9 @@
             this.GroupBoxMotorSampling.Controls.Add(this.labelMotorSampling);
             this.GroupBoxMotorSampling.Controls.Add(this.SamplingStop);
             this.GroupBoxMotorSampling.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.GroupBoxMotorSampling.Location = new System.Drawing.Point(17, 11);
+            this.GroupBoxMotorSampling.Location = new System.Drawing.Point(28, 50);
             this.GroupBoxMotorSampling.Name = "GroupBoxMotorSampling";
-            this.GroupBoxMotorSampling.Size = new System.Drawing.Size(360, 287);
+            this.GroupBoxMotorSampling.Size = new System.Drawing.Size(360, 286);
             this.GroupBoxMotorSampling.TabIndex = 4;
             this.GroupBoxMotorSampling.TabStop = false;
             this.GroupBoxMotorSampling.Text = "Motor Sampling";
@@ -252,7 +257,7 @@
             this.GroupBoxThingworxUpload.Controls.Add(this.labelUploadStatus);
             this.GroupBoxThingworxUpload.Controls.Add(this.labelThingworxUpload);
             this.GroupBoxThingworxUpload.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.GroupBoxThingworxUpload.Location = new System.Drawing.Point(426, 12);
+            this.GroupBoxThingworxUpload.Location = new System.Drawing.Point(417, 50);
             this.GroupBoxThingworxUpload.Name = "GroupBoxThingworxUpload";
             this.GroupBoxThingworxUpload.Size = new System.Drawing.Size(360, 286);
             this.GroupBoxThingworxUpload.TabIndex = 5;
@@ -371,7 +376,7 @@
             this.groupBoxDiagnostics.Controls.Add(this.labelNotificationQueueCount);
             this.groupBoxDiagnostics.Controls.Add(this.labelInboundQueueCount);
             this.groupBoxDiagnostics.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBoxDiagnostics.Location = new System.Drawing.Point(17, 324);
+            this.groupBoxDiagnostics.Location = new System.Drawing.Point(28, 342);
             this.groupBoxDiagnostics.Name = "groupBoxDiagnostics";
             this.groupBoxDiagnostics.Size = new System.Drawing.Size(769, 190);
             this.groupBoxDiagnostics.TabIndex = 7;
@@ -391,6 +396,7 @@
             // 
             // listBoxNotifications
             // 
+            this.listBoxNotifications.Enabled = false;
             this.listBoxNotifications.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listBoxNotifications.FormattingEnabled = true;
             this.listBoxNotifications.ItemHeight = 20;
@@ -401,6 +407,7 @@
             // 
             // textBoxNotificationQueueCount
             // 
+            this.textBoxNotificationQueueCount.Enabled = false;
             this.textBoxNotificationQueueCount.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBoxNotificationQueueCount.Location = new System.Drawing.Point(283, 118);
             this.textBoxNotificationQueueCount.Name = "textBoxNotificationQueueCount";
@@ -485,6 +492,39 @@
             this.Label3Sponsors.Text = "IOT Sponsors";
             this.Label3Sponsors.Click += new System.EventHandler(this.Label3Sponsors_Click);
             // 
+            // menuStrip1
+            // 
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ConfigurationToolStripMenuItem1,
+            this.aboutToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(1065, 24);
+            this.menuStrip1.TabIndex = 13;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // ConfigurationToolStripMenuItem1
+            // 
+            this.ConfigurationToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.settingsToolStripMenuItem});
+            this.ConfigurationToolStripMenuItem1.Name = "ConfigurationToolStripMenuItem1";
+            this.ConfigurationToolStripMenuItem1.Size = new System.Drawing.Size(93, 20);
+            this.ConfigurationToolStripMenuItem1.Text = "Configuration";
+            // 
+            // settingsToolStripMenuItem
+            // 
+            this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
+            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.settingsToolStripMenuItem.Text = "Settings";
+            this.settingsToolStripMenuItem.Click += new System.EventHandler(this.settingsToolStripMenuItem_Click);
+            // 
+            // aboutToolStripMenuItem
+            // 
+            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(52, 20);
+            this.aboutToolStripMenuItem.Text = "About";
+            this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -500,6 +540,7 @@
             this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(this.GroupBoxThingworxUpload);
             this.Controls.Add(this.GroupBoxMotorSampling);
+            this.Controls.Add(this.menuStrip1);
             this.Name = "Form1";
             this.Text = "IOT Gateway Dashboard";
             this.Load += new System.EventHandler(this.Form1_Load);
@@ -517,6 +558,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -561,6 +604,10 @@
         private System.Windows.Forms.PictureBox pictureBox3;
         private System.Windows.Forms.PictureBox pictureBox4;
         private System.Windows.Forms.Label Label3Sponsors;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem ConfigurationToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem settingsToolStripMenuItem;
     }
 }
 

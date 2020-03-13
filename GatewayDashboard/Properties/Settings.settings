@@ -32,5 +32,17 @@
     <Setting Name="BaseURL" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
+    <Setting Name="EDUsername" Type="System.String" Scope="User">
+      <Value Profile="(Default)">pi</Value>
+    </Setting>
+    <Setting Name="EDPassword" Type="System.String" Scope="User">
+      <Value Profile="(Default)">raspberry</Value>
+    </Setting>
+    <Setting Name="EDIPAddress" Type="System.String" Scope="User">
+      <Value Profile="(Default)">10.5.37.222</Value>
+    </Setting>
+    <Setting Name="EDPort" Type="System.String" Scope="User">
+      <Value Profile="(Default)">5800</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

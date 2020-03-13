@@ -142,5 +142,53 @@ namespace SamplingStartStop.Properties {
                 this["BaseURL"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("pi")]
+        public string EDUsername {
+            get {
+                return ((string)(this["EDUsername"]));
+            }
+            set {
+                this["EDUsername"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("raspberry")]
+        public string EDPassword {
+            get {
+                return ((string)(this["EDPassword"]));
+            }
+            set {
+                this["EDPassword"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("10.5.37.222")]
+        public string EDIPAddress {
+            get {
+                return ((string)(this["EDIPAddress"]));
+            }
+            set {
+                this["EDIPAddress"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("5800")]
+        public string EDPort {
+            get {
+                return ((string)(this["EDPort"]));
+            }
+            set {
+                this["EDPort"] = value;
+            }
+        }
     }
 }

@@ -13,6 +13,7 @@ using System.Messaging;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using RestSharp;
+using SamplingStartStop.Properties;
 
 namespace SamplingStartStop
 {
@@ -507,5 +508,18 @@ namespace SamplingStartStop
         {
 
         }
+
+        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            AboutBox1 myAboutForm = new AboutBox1();
+            myAboutForm.ShowDialog();
+        }
+
+        private void settingsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form2 mySettingsForm = new Form2();
+            mySettingsForm.ShowDialog();
+        }  
+        
     }
 }
