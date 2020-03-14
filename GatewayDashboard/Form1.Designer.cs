@@ -365,6 +365,7 @@
             this.Controls.Add(this.GroupBoxThingworxUpload);
             this.Controls.Add(this.GroupBoxMotorSampling);
             this.Controls.Add(this.menuStrip1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "Form1";
             this.Text = "IOT Gateway Dashboard";
             this.Load += new System.EventHandler(this.Form1_Load);

@@ -29,6 +29,12 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.BrokerPortTextBox1 = new System.Windows.Forms.TextBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.BrokerIPTextBox1 = new System.Windows.Forms.TextBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.BrokerAPIKeyTextBox1 = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
             this.EdgeDeviceGroupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.CheckBox8 = new System.Windows.Forms.CheckBox();
@@ -52,12 +58,6 @@
             this.label6 = new System.Windows.Forms.Label();
             this.BaseURL = new System.Windows.Forms.TextBox();
             this.APIKey = new System.Windows.Forms.TextBox();
-            this.label7 = new System.Windows.Forms.Label();
-            this.BrokerAPIKeyTextBox1 = new System.Windows.Forms.TextBox();
-            this.label8 = new System.Windows.Forms.Label();
-            this.BrokerIPTextBox1 = new System.Windows.Forms.TextBox();
-            this.label9 = new System.Windows.Forms.Label();
-            this.BrokerPortTextBox1 = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.EdgeDeviceGroupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -80,6 +80,60 @@
             this.groupBox1.TabIndex = 5;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Broker API Settings";
+            // 
+            // BrokerPortTextBox1
+            // 
+            this.BrokerPortTextBox1.Location = new System.Drawing.Point(7, 131);
+            this.BrokerPortTextBox1.Name = "BrokerPortTextBox1";
+            this.BrokerPortTextBox1.Size = new System.Drawing.Size(58, 22);
+            this.BrokerPortTextBox1.TabIndex = 5;
+            this.BrokerPortTextBox1.TextChanged += new System.EventHandler(this.BrokerPortTextBox1_TextChanged);
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.Location = new System.Drawing.Point(7, 114);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(26, 13);
+            this.label9.TabIndex = 4;
+            this.label9.Text = "Port";
+            // 
+            // BrokerIPTextBox1
+            // 
+            this.BrokerIPTextBox1.Location = new System.Drawing.Point(7, 85);
+            this.BrokerIPTextBox1.Name = "BrokerIPTextBox1";
+            this.BrokerIPTextBox1.Size = new System.Drawing.Size(100, 22);
+            this.BrokerIPTextBox1.TabIndex = 3;
+            this.BrokerIPTextBox1.TextChanged += new System.EventHandler(this.BrokerIPTextBox1_TextChanged);
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.Location = new System.Drawing.Point(7, 68);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(58, 13);
+            this.label8.TabIndex = 2;
+            this.label8.Text = "IP Address";
+            // 
+            // BrokerAPIKeyTextBox1
+            // 
+            this.BrokerAPIKeyTextBox1.Location = new System.Drawing.Point(7, 39);
+            this.BrokerAPIKeyTextBox1.Name = "BrokerAPIKeyTextBox1";
+            this.BrokerAPIKeyTextBox1.Size = new System.Drawing.Size(298, 22);
+            this.BrokerAPIKeyTextBox1.TabIndex = 1;
+            this.BrokerAPIKeyTextBox1.TextChanged += new System.EventHandler(this.BrokerAPIKeyTextBox1_TextChanged);
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Location = new System.Drawing.Point(7, 22);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(42, 13);
+            this.label7.TabIndex = 0;
+            this.label7.Text = "APIKey";
             // 
             // EdgeDeviceGroupBox1
             // 
@@ -331,60 +385,6 @@
             this.APIKey.TabIndex = 4;
             this.APIKey.TextChanged += new System.EventHandler(this.APIKey_TextChanged_1);
             // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(7, 22);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(42, 13);
-            this.label7.TabIndex = 0;
-            this.label7.Text = "APIKey";
-            // 
-            // BrokerAPIKeyTextBox1
-            // 
-            this.BrokerAPIKeyTextBox1.Location = new System.Drawing.Point(7, 39);
-            this.BrokerAPIKeyTextBox1.Name = "BrokerAPIKeyTextBox1";
-            this.BrokerAPIKeyTextBox1.Size = new System.Drawing.Size(298, 22);
-            this.BrokerAPIKeyTextBox1.TabIndex = 1;
-            this.BrokerAPIKeyTextBox1.TextChanged += new System.EventHandler(this.BrokerAPIKeyTextBox1_TextChanged);
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(7, 68);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(58, 13);
-            this.label8.TabIndex = 2;
-            this.label8.Text = "IP Address";
-            // 
-            // BrokerIPTextBox1
-            // 
-            this.BrokerIPTextBox1.Location = new System.Drawing.Point(7, 85);
-            this.BrokerIPTextBox1.Name = "BrokerIPTextBox1";
-            this.BrokerIPTextBox1.Size = new System.Drawing.Size(100, 22);
-            this.BrokerIPTextBox1.TabIndex = 3;
-            this.BrokerIPTextBox1.TextChanged += new System.EventHandler(this.BrokerIPTextBox1_TextChanged);
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(7, 114);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(26, 13);
-            this.label9.TabIndex = 4;
-            this.label9.Text = "Port";
-            // 
-            // BrokerPortTextBox1
-            // 
-            this.BrokerPortTextBox1.Location = new System.Drawing.Point(7, 131);
-            this.BrokerPortTextBox1.Name = "BrokerPortTextBox1";
-            this.BrokerPortTextBox1.Size = new System.Drawing.Size(58, 22);
-            this.BrokerPortTextBox1.TabIndex = 5;
-            this.BrokerPortTextBox1.TextChanged += new System.EventHandler(this.BrokerPortTextBox1_TextChanged);
-            // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -394,6 +394,7 @@
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.EdgeDeviceGroupBox1);
             this.Controls.Add(this.ThingworxGroupBox1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "Form2";
             this.Text = "Configuration Settings";
             this.Load += new System.EventHandler(this.Form2_Load);

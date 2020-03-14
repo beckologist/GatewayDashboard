@@ -398,7 +398,7 @@ namespace SamplingStartStop
                     myRequest.AddParameter("application/json", myMessageParts.ElementAt(1), ParameterType.RequestBody);
                     IRestResponse response = myClient.Execute(myRequest);
                     //Console.WriteLine(response.Content);
-                    if (response.StatusCode.ToString() != "204")
+                    if (response.StatusCode.ToString() != "OK")
                     {
                         // put the message back onto the queue and break out of while loop and throw an exception
                         theContinueSendingFlag = false;
