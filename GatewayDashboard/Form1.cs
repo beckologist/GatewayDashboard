@@ -397,7 +397,14 @@ namespace SamplingStartStop
                     myRequest.AddHeader("Accept", "application/json");
                     myRequest.AddParameter("application/json", myMessageParts.ElementAt(1), ParameterType.RequestBody);
                     IRestResponse response = myClient.Execute(myRequest);
-                    Console.WriteLine(response.Content);
+                    //Console.WriteLine(response.Content);
+                    if (response.StatusCode.ToString() != "204")
+                    {
+                        // put the message back onto the queue and break out of while loop and throw an exception
+                        theContinueSendingFlag = false;
+                        theInboundMessageQueue.Send(myMessage);
+                        throw new Exception("Connection Error:   " + response.Content + "   " + response.StatusCode + "**** " + myMessageParts.ElementAt(0) + "   " + myMessageParts.ElementAt(1));
+                    }
                     //MessageBox.Show(response.Content + "   " + response.StatusCode + "**** " + myMessageParts.ElementAt(0) + "   " + myMessageParts.ElementAt(1));
 
                 }
